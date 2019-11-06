@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Assignment 9</title>
+  <style type="text/css">
+    html {
+      font-size: 20px;
+      padding: 80px 80px;
+      font-family: 'helvetica';
+    }
+
+    select {
+      font-size: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Serialized Tracklist:</h2>
+
+  <script language="javascript">
+    tracklist = [{
+        'title': 'Pagtingin',
+        'artist': 'Ben&Ben',
+        'genre': ['indie', 'folk', 'pop rock'],
+        'release': '2019'
+      },
+
+      {
+        'title': 'Mabagal',
+        'artist': ['Daniel Padilla', ' Moira Dela Torre'],
+        'genre': ['pop'],
+        'release': '2019'
+      },
+
+      {
+        'title': 'Kung Di Rin Lang Ikaw',
+        'artist': ['December Avenue', ' Moira Dela Torre'],
+        'genre': ['alternative', 'pop rock'],
+        'release': '2018'
+      },
+
+      {
+        'title': 'Bakit Ngayon Ka Lang',
+        'artist': ['Pops Fernandez', ' Freestyle'],
+        'genre': ['ballad', 'pop rock'],
+        'release': '2001'
+      },
+
+      {
+        'title': 'Araw-Araw',
+        'artist': 'Ben&Ben',
+        'genre': ['indie', 'folk', 'rock'],
+        'release': '2019'
+      },
+
+      {
+        'title': 'Kahit Ayaw Mo Na',
+        'artist': 'This Band',
+        'genre': ['indie', 'pop rock'],
+        'release': '2018'
+      },
+
+      {
+        'title': 'Umaapaw',
+        'artist': 'Ang Bandang Shirley',
+        'genre': ['alternative', 'pop rock'],
+        'release': '2017'
+      },
+
+      {
+        'title': 'Di Na Muli',
+        'artist': 'Itchyworms',
+        'genre': ['alternative', 'rock'],
+        'release': '2016'
+      },
+
+      {
+        'title': 'Kathang Isip',
+        'artist': 'Ben&Ben',
+        'genre': ['indie', 'folk', 'rock'],
+        'release': '2017'
+      },
+
+      {
+        'title': 'Sana',
+        'artist': 'I Belong to the Zoo',
+        'genre': ['alternative', 'rock'],
+        'release': '2018'
+      }
+    ]
+
+    serialized = new Array;
+    neat = new Array;
+
+    for (i = 0; i < 10; i++) {
+      serialized[i] = JSON.stringify(tracklist[i]);
+      document.write(serialized[i] + "<br>");
+    }
+  </script>
+
+  <h2>User Friendly Tracklist:</h2>
+
+  <script language="javascript">
+    for (j = 0; j < 10; j++) {
+      neat[j] = JSON.parse(serialized[j]);
+      document.write(
+        neat[j]['title'] + "<br>" +
+        "Artist: " + neat[j]['artist'] + "<br>" +
+        "Genre: " + neat[j]['genre'] + "<br>" +
+        "Released " + neat[j]['release'] + "<br><br>");
+    }
+
+    function genre_results() {
+      document.getElementById("print_results").innerHTML = "";
+      var selected = document.getElementById("genre_list").value;
+
+      for (var k = 0; k < 10; k++) {
+        for (var m = 0; m < neat[k]['genre'].length; m++) {
+          if (neat[k]['genre'][m] == selected) {
+
+            document.getElementById("print_results").innerHTML += (neat[k]['title'] + "<br>" +
+              "Artist: " + neat[k]['artist'] + "<br>" +
+              "Genre: " + neat[k]['genre'] + "<br>" +
+              "Released " + neat[k]['release'] + "<br><br>");
+          }
+        }
+      }
+    }
+  </script>
+
+  <h2>Genre List</h2>
+  <h3>Pick a genre and we'll provide songs you'll enjoy!</h3>
+
+  <form>
+    <select id="genre_list" size="7">
+      <option value="alternative">alternative</option>
+      <option value="ballad">ballad</option>
+      <option value="folk">folk</option>
+      <option value="indie">indie</option>
+      <option value="pop">pop</option>
+      <option value="pop rock">pop rock</option>
+      <option value="rock">rock</option>
+    </select>
+
+    <input type="button" value="Go!" onclick='genre_results()'>
+  </form>
+  <br>
+  <div class="row2" id="print_results"></div>
+</body>
+
+</html>
